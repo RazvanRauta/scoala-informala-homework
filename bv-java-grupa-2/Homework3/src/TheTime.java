@@ -1,6 +1,4 @@
 
-// @author Razvan
-
 import java.util.Scanner;
 
 public class TheTime {
@@ -50,10 +48,5 @@ public class TheTime {
         }
 
         return val;
-
-
     }
-
-
-
 }
