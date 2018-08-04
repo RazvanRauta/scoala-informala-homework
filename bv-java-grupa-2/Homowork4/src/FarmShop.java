@@ -64,42 +64,47 @@ public class FarmShop {
 
         System.out.println("Shop's Inventory");
         System.out.println("Animal products: ");
-        for (int i = 0; i < this.myAnimalProducts.size(); i++) {
-            System.out.println("ID: " +
-                    this.myAnimalProducts.get(i).getId() +
-                    " |Name: " +
-                    this.myAnimalProducts.get(i).getName() +
-                    " |Weight: " +
-                    this.myAnimalProducts.get(i).getWeight() +
-                    " |Price: " +
-                    this.myAnimalProducts.get(i).getPrice() +
-                    " |Storage Temp: " +
-                    this.myAnimalProducts.get(i).getStoTemp() +
-                    " |Expiration date: "+
-                    this.myAnimalProducts.get(i).getExpDate()+
-                    " |Added on: " +
-                    this.myAnimalProducts.get(i).getAddDate());
+        if (this.myAnimalProducts.size()>0) {
+            for (int i = 0; i < this.myAnimalProducts.size(); i++) {
+                System.out.println("ID: " +
+                        this.myAnimalProducts.get(i).getId() +
+                        " |Name: " +
+                        this.myAnimalProducts.get(i).getName() +
+                        " |Weight: " +
+                        this.myAnimalProducts.get(i).getWeight() +
+                        " |Price: " +
+                        this.myAnimalProducts.get(i).getPrice() +
+                        " |Storage Temp: " +
+                        this.myAnimalProducts.get(i).getStoTemp() +
+                        " |Expiration date: " +
+                        this.myAnimalProducts.get(i).getExpDate() +
+                        " |Added on: " +
+                        this.myAnimalProducts.get(i).getAddDate());
+            }
         }
 
         System.out.println("Vegetable products: ");
 
-        for (int i = 0; i < this.myVegProducts.size(); i++) {
-            System.out.println("ID: " +
-                    this.myVegProducts.get(i).getId() +
-                    " |Name: " +
-                    this.myVegProducts.get(i).getName() +
-                    " |Weight: " +
-                    this.myVegProducts.get(i).getWeight() +
-                    " |Price: " +
-                    this.myVegProducts.get(i).getPrice() +
-                    " |Vitamines: " +
-                    this.myVegProducts.get(i).getVitamines() +
-                    " |Carbohydrates"+
-                    this.myVegProducts.get(i).getCarbo()+
-                    " |Expiration date: "+
-                    this.myVegProducts.get(i).getExpDate()+
-                    " |Added on: " +
-                    this.myAnimalProducts.get(i).getAddDate());
+        if (this.myVegProducts.size()>0) {
+
+            for (int i = 0; i < this.myVegProducts.size(); i++) {
+                System.out.println("ID: " +
+                        this.myVegProducts.get(i).getId() +
+                        " |Name: " +
+                        this.myVegProducts.get(i).getName() +
+                        " |Weight: " +
+                        this.myVegProducts.get(i).getWeight() +
+                        " |Price: " +
+                        this.myVegProducts.get(i).getPrice() +
+                        " |Vitamines: " +
+                        this.myVegProducts.get(i).getVitamines() +
+                        " |Carbohydrates" +
+                        this.myVegProducts.get(i).getCarbo() +
+                        " |Expiration date: " +
+                        this.myVegProducts.get(i).getExpDate() +
+                        " |Added on: " +
+                        this.myAnimalProducts.get(i).getAddDate());
+            }
         }
     }
 
@@ -113,6 +118,32 @@ public class FarmShop {
         for (int i = 0; i < this.myAnimalProducts.size(); i++) {
             AnimalProd animalProd = this.myAnimalProducts.get(i);
             if (animalProd.getName().equals(animalProductName)) {
+                return i;
+            }
+        }
+
+        return -1;
+
+    }
+
+    private int findAnimalID(String animalId) {
+
+        for (int i = 0; i < this.myAnimalProducts.size(); i++) {
+            AnimalProd animalProd = this.myAnimalProducts.get(i);
+            if (animalProd.getId().equals(animalId)) {
+                return i;
+            }
+        }
+
+        return -1;
+
+    }
+
+    private int findVegetableID(String vegetableId) {
+
+        for (int i = 0; i < this.myVegProducts.size(); i++) {
+            VegetableProd vegetableProd = this.myVegProducts.get(i);
+            if (vegetableProd.getId().equals(vegetableId)) {
                 return i;
             }
         }
@@ -153,6 +184,16 @@ public class FarmShop {
         return null;
     }
 
+    public AnimalProd searchAnimal(String id){
+
+        int position = findAnimalID(id);
+        if (position >=0) {
+            return this.myAnimalProducts.get(position);
+        }
+
+        return null;
+    }
+
     public VegetableProd searchByDateVegetable(Date date){
         int position = findVegetableProduct(date);
         if (position >=0) {
@@ -161,6 +202,16 @@ public class FarmShop {
 
         return null;
     }
+
+    public VegetableProd searchVegetable(String id){
+        int position = findVegetableID(id);
+        if (position >=0) {
+            return this.myVegProducts.get(position);
+        }
+
+        return null;
+    }
+
 
     private int findVegetableProduct(VegetableProd vegetableProd) {
 

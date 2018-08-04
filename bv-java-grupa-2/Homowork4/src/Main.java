@@ -38,10 +38,7 @@ public class Main {
                     break;
                 case 2:
                     farmShop.displayProducts();
-                    System.out.println("Enter product id: ");
-                    String id = scanner.nextLine();
-                    System.out.println("Enter quantity: ");
-                    int  q = scanner.nextInt();
+                    removeProducts();
                     break;
                 case 3:
                     displayDailySales();
@@ -75,7 +72,7 @@ public class Main {
         AnimalProd newProduct = AnimalProd.createAnimalProduct(id, name, price, weight, expDate, temp);
         if (farmShop.addNewAnimalProd(newProduct)) {
             System.out.println("New product added: " + name);
-        }else{
+        } else {
             System.out.println("Cannot add, " + name + " already on file");
         }
     }
@@ -98,10 +95,10 @@ public class Main {
         System.out.println("Enter expiration date in format: YYYY-MM-DD ");
         String expDate = scanner.nextLine();
 
-        VegetableProd newProduct = VegetableProd.createVegetableProduct(id, name, price, weight, expDate, vitamins,carbo);
+        VegetableProd newProduct = VegetableProd.createVegetableProduct(id, name, price, weight, expDate, vitamins, carbo);
         if (farmShop.addNewVegetableProduct(newProduct)) {
             System.out.println("New product added: " + name);
-        }else{
+        } else {
             System.out.println("Cannot add, " + name + " already on file");
         }
     }
@@ -116,21 +113,72 @@ public class Main {
         System.out.println("Choose your action : \n");
     }
 
+    public static void removeProducts(){
+        System.out.println("Enter product id: ");
+        String id = scanner.nextLine();
+        AnimalProd existingAnimalProduct = farmShop.searchAnimal(id);
+        VegetableProd existingVegetableProduct = farmShop.searchVegetable(id);
+
+        if (existingAnimalProduct == null){
+            System.out.println("Product not found in Animal productss");
+            return;
+        }
+
+        if (farmShop.removeAnimalProduct(existingAnimalProduct)) {
+            System.out.println("Product was sold");
+        }else{
+            System.out.println("Error deleting product");
+        }
+
+        if (existingVegetableProduct == null){
+            System.out.println("Product not found in Vegetables products.");
+            return;
+        }
+        if (farmShop.removeVegetableProduct(existingVegetableProduct)) {
+            System.out.println("Product was sold");
+        }else{
+            System.out.println("Error deleting product");
+        }
+    }
+
     private static void displayDailySales() {
         System.out.println("Enter date in YYYY-MM-DD format: ");
-        DateFormat format = new SimpleDateFormat("YYYY-MM-DD");
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;
         while (date == null) {
             String line = scanner.nextLine();
-            try{
+            try {
                 date = format.parse(line);
-                }catch (ParseException e) {
+                System.out.println("Added products on " + date + " :");
+                try {
+                    if (farmShop.searchByDateAnimal(date).getName() != null) {
+
+                        System.out.println("Animal Products: " + farmShop.searchByDateAnimal(date).getName());
+
+                    } else {
+
+                        System.out.println("No animal products added in " + date);
+                    }
+
+                    if (farmShop.searchByDateVegetable(date).getName() != null) {
+
+                        System.out.println("Vegetable products: " + farmShop.searchByDateVegetable(date).getName());
+
+                    } else {
+
+                        System.out.println("No vegetable products added in " + date);
+                    }
+
+                } catch (NullPointerException e) {
+
+                    //System.out.print("");
+                }
+
+            } catch (ParseException e) {
+
                 System.out.println("Invalid date,Try again!");
             }
         }
-
-        farmShop.searchByDateAnimal(date);
-        farmShop.searchByDateVegetable(date);
 
 
     }

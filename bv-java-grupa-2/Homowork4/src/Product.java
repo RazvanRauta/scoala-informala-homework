@@ -1,3 +1,5 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Product {
@@ -14,13 +16,24 @@ public class Product {
         this.price = price;
         this.weight = weight;
         this.expDate = expDate;
-        this.addDate = new Date();
+        this.addDate = setAddDate();
 
+    }
+
+    public Date setAddDate() {
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date dt = sf.parse(sf.format(new Date()));
+            return dt;
+        } catch (ParseException e) {
+            return null;
+        }
     }
 
     public double getPrice() {
 
         return price;
+
     }
 
     public String getExpDate() {
