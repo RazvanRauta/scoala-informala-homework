@@ -1,11 +1,13 @@
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class FarmShop {
 
     private String name;
-    private ArrayList<AnimalProd> myAnimalProducts;
-    private ArrayList<VegetableProd> myVegProducts;
+    private List<AnimalProd> myAnimalProducts;
+    private List<VegetableProd> myVegProducts;
+
 
     public FarmShop(String name) {
         this.name = name;
@@ -34,9 +36,9 @@ public class FarmShop {
         return true;
     }
 
-    public boolean removeAnimalProduct(AnimalProd animalProd){
+    public boolean removeAnimalProduct(AnimalProd animalProd) {
         int foundPosition = findAnimalProduct(animalProd);
-        if (foundPosition<0){
+        if (foundPosition < 0) {
             System.out.println(animalProd.getName() + ", was not found");
             return false;
         }
@@ -47,9 +49,9 @@ public class FarmShop {
 
     }
 
-    public boolean removeVegetableProduct(VegetableProd vegetableProd){
+    public boolean removeVegetableProduct(VegetableProd vegetableProd) {
         int foundPosition = findVegetableProduct(vegetableProd);
-        if (foundPosition<0){
+        if (foundPosition < 0) {
             System.out.println(vegetableProd.getName() + ", was not found");
             return false;
         }
@@ -60,51 +62,65 @@ public class FarmShop {
 
     }
 
-    public void displayProducts() {
-
+    public boolean displayAnimalProducts() {
         System.out.println("Shop's Inventory");
-        System.out.println("Animal products: ");
-        if (this.myAnimalProducts.size()>0) {
-            for (int i = 0; i < this.myAnimalProducts.size(); i++) {
+        if (!this.myAnimalProducts.isEmpty()) {
+            System.out.println("Animal products: ");
+            for (AnimalProd myAnimalProduct : this.myAnimalProducts) {
                 System.out.println("ID: " +
-                        this.myAnimalProducts.get(i).getId() +
+                        myAnimalProduct.getId() +
                         " |Name: " +
-                        this.myAnimalProducts.get(i).getName() +
+                        myAnimalProduct.getName() +
                         " |Weight: " +
-                        this.myAnimalProducts.get(i).getWeight() +
+                        myAnimalProduct.getWeight() +
                         " |Price: " +
-                        this.myAnimalProducts.get(i).getPrice() +
+                        myAnimalProduct.getPrice() +
                         " |Storage Temp: " +
-                        this.myAnimalProducts.get(i).getStoTemp() +
+                        myAnimalProduct.getStoTemp() +
                         " |Expiration date: " +
-                        this.myAnimalProducts.get(i).getExpDate() +
+                        myAnimalProduct.getExpDate() +
                         " |Added on: " +
-                        this.myAnimalProducts.get(i).getAddDate());
+                        myAnimalProduct.getAddDate());
             }
+
+            return true;
+
+        } else {
+            System.out.println("No animal products!");
+
+            return false;
         }
 
-        System.out.println("Vegetable products: ");
+    }
 
-        if (this.myVegProducts.size()>0) {
+    public boolean displayVegetableProducts() {
 
-            for (int i = 0; i < this.myVegProducts.size(); i++) {
+        if (!this.myVegProducts.isEmpty()) {
+
+            System.out.println("Vegetable products: ");
+
+            for (VegetableProd myVegProduct : this.myVegProducts) {
                 System.out.println("ID: " +
-                        this.myVegProducts.get(i).getId() +
+                        myVegProduct.getId() +
                         " |Name: " +
-                        this.myVegProducts.get(i).getName() +
+                        myVegProduct.getName() +
                         " |Weight: " +
-                        this.myVegProducts.get(i).getWeight() +
+                        myVegProduct.getWeight() +
                         " |Price: " +
-                        this.myVegProducts.get(i).getPrice() +
+                        myVegProduct.getPrice() +
                         " |Vitamines: " +
-                        this.myVegProducts.get(i).getVitamines() +
+                        myVegProduct.getVitamines() +
                         " |Carbohydrates" +
-                        this.myVegProducts.get(i).getCarbo() +
+                        myVegProduct.getCarbo() +
                         " |Expiration date: " +
-                        this.myVegProducts.get(i).getExpDate() +
+                        myVegProduct.getExpDate() +
                         " |Added on: " +
-                        this.myAnimalProducts.get(i).getAddDate());
+                        myVegProduct.getAddDate());
             }
+            return true;
+        } else {
+            System.out.println("No vegetable products");
+            return false;
         }
     }
 
@@ -152,7 +168,7 @@ public class FarmShop {
 
     }
 
-    private int findAnimalProduct(Date date){
+    private int findAnimalProduct(Date date) {
         for (int i = 0; i < this.myAnimalProducts.size(); i++) {
             AnimalProd animalProd = this.myAnimalProducts.get(i);
             if (animalProd.getAddDate().equals(date)) {
@@ -174,38 +190,38 @@ public class FarmShop {
         return -1;
     }
 
-    public AnimalProd searchByDateAnimal(Date date){
+    public AnimalProd searchByDateAnimal(Date date) {
 
         int position = findAnimalProduct(date);
-        if (position >=0) {
+        if (position >= 0) {
             return this.myAnimalProducts.get(position);
         }
 
         return null;
     }
 
-    public AnimalProd searchAnimal(String id){
+    public AnimalProd searchAnimal(String id) {
 
         int position = findAnimalID(id);
-        if (position >=0) {
+        if (position >= 0) {
             return this.myAnimalProducts.get(position);
         }
 
         return null;
     }
 
-    public VegetableProd searchByDateVegetable(Date date){
+    public VegetableProd searchByDateVegetable(Date date) {
         int position = findVegetableProduct(date);
-        if (position >=0) {
+        if (position >= 0) {
             return this.myVegProducts.get(position);
         }
 
         return null;
     }
 
-    public VegetableProd searchVegetable(String id){
+    public VegetableProd searchVegetable(String id) {
         int position = findVegetableID(id);
-        if (position >=0) {
+        if (position >= 0) {
             return this.myVegProducts.get(position);
         }
 

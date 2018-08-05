@@ -1,6 +1,7 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 public class Product {
     private String id;
@@ -56,5 +57,22 @@ public class Product {
         return addDate;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Product)) return false;
+        Product product = (Product) o;
+        return Double.compare(product.price, price) == 0 &&
+                Double.compare(product.weight, weight) == 0 &&
+                Objects.equals(id, product.id) &&
+                Objects.equals(name, product.name) &&
+                Objects.equals(expDate, product.expDate) &&
+                Objects.equals(addDate, product.addDate);
+    }
 
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, name, price, weight, expDate, addDate);
+    }
 }

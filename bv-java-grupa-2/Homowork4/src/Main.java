@@ -10,6 +10,7 @@ public class Main {
 
     private static FarmShop farmShop = new FarmShop("Sergiana");
 
+
     public static void main(String[] args) {
 
         boolean quit = false;
@@ -21,7 +22,7 @@ public class Main {
 
             switch (action) {
                 case 1:
-                    System.out.println("Product type ( 1 - Animal | 2 - Vegetable ");
+                    System.out.println("Product type ( 1 - Animal | 2 - Vegetable )");
                     int action2 = scanner.nextInt();
                     scanner.nextLine();
                     switch (action2) {
@@ -37,8 +38,17 @@ public class Main {
                     }
                     break;
                 case 2:
-                    farmShop.displayProducts();
-                    removeProducts();
+                    boolean animal = farmShop.displayAnimalProducts();
+                    boolean vegetable = farmShop.displayVegetableProducts();
+
+                    if (animal || vegetable) {
+
+                        System.out.println("Enter product id: ");
+                        String id = scanner.nextLine();
+                        removeAnimalProduct(id);
+                        removeVegetProduct(id);
+                    }
+
                     break;
                 case 3:
                     displayDailySales();
@@ -113,30 +123,32 @@ public class Main {
         System.out.println("Choose your action : \n");
     }
 
-    public static void removeProducts(){
-        System.out.println("Enter product id: ");
-        String id = scanner.nextLine();
-        AnimalProd existingAnimalProduct = farmShop.searchAnimal(id);
-        VegetableProd existingVegetableProduct = farmShop.searchVegetable(id);
+    public static void removeAnimalProduct(String id) {
 
-        if (existingAnimalProduct == null){
-            System.out.println("Product not found in Animal productss");
+        AnimalProd existingAnimalProduct = farmShop.searchAnimal(id);
+
+        if (existingAnimalProduct == null) {
+
             return;
         }
 
         if (farmShop.removeAnimalProduct(existingAnimalProduct)) {
             System.out.println("Product was sold");
-        }else{
+        } else {
             System.out.println("Error deleting product");
         }
+    }
 
-        if (existingVegetableProduct == null){
-            System.out.println("Product not found in Vegetables products.");
+    public static void removeVegetProduct(String id) {
+
+        VegetableProd existingVegetableProduct = farmShop.searchVegetable(id);
+
+        if (existingVegetableProduct == null) {
             return;
         }
         if (farmShop.removeVegetableProduct(existingVegetableProduct)) {
             System.out.println("Product was sold");
-        }else{
+        } else {
             System.out.println("Error deleting product");
         }
     }
@@ -149,20 +161,20 @@ public class Main {
             String line = scanner.nextLine();
             try {
                 date = format.parse(line);
-                System.out.println("Added products on " + date + " :");
-                try {
-                    if (farmShop.searchByDateAnimal(date).getName() != null) {
 
-                        System.out.println("Animal Products: " + farmShop.searchByDateAnimal(date).getName());
+                try {
+                    if (farmShop.searchByDateAnimal(date) != null) {
+
+                        System.out.println("Animal Products: " + farmShop.searchByDateAnimal(date).getName() + ", added on: " + date);
 
                     } else {
 
-                        System.out.println("No animal products added in " + date);
+                        System.out.println("No animal products added on " + date);
                     }
 
-                    if (farmShop.searchByDateVegetable(date).getName() != null) {
+                    if (farmShop.searchByDateVegetable(date) != null) {
 
-                        System.out.println("Vegetable products: " + farmShop.searchByDateVegetable(date).getName());
+                        System.out.println("Vegetable products: " + farmShop.searchByDateVegetable(date).getName() + ", added on: " + date);
 
                     } else {
 
@@ -171,7 +183,8 @@ public class Main {
 
                 } catch (NullPointerException e) {
 
-                    //System.out.print("");
+                    System.out.println("Null catch");
+
                 }
 
             } catch (ParseException e) {
