@@ -3,10 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/bv-java-grupa-2/Homework1/Homework1.iml" filepath="$PROJECT_DIR$/bv-java-grupa-2/Homework1/Homework1.iml" />
-      <module fileurl="file://$PROJECT_DIR$/bv-java-grupa-2/Homework2/Homework2.iml" filepath="$PROJECT_DIR$/bv-java-grupa-2/Homework2/Homework2.iml" />
       <module fileurl="file://$PROJECT_DIR$/bv-java-grupa-2/Homework3/Homework3.iml" filepath="$PROJECT_DIR$/bv-java-grupa-2/Homework3/Homework3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Homework5.iml" filepath="$PROJECT_DIR$/.idea/modules/Homework5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Homework5_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Homework5_main.iml" group="Homework5" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Homework5_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Homework5_test.iml" group="Homework5" />
       <module fileurl="file://$PROJECT_DIR$/bv-java-grupa-2/Homowork4/Homowork4.iml" filepath="$PROJECT_DIR$/bv-java-grupa-2/Homowork4/Homowork4.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/scoala-informala-homework.iml" filepath="$PROJECT_DIR$/.idea/scoala-informala-homework.iml" />
     </modules>
   </component>
 </project>
