@@ -36,11 +36,13 @@ public class TheTime {
         boolean val;
 
         if (hour < 0 || hour > 23) {
-            System.out.println("Incorrect hour.Pleas try again");
+
+            System.out.println("Incorrect hour.Please try again");
             val = false;
 
         } else if (minutes < 0 || minutes > 59) {
-            System.out.println("Incorrect minutes.Pleas try again");
+
+            System.out.println("Incorrect minutes.Please try again");
             val = false;
 
         } else {
