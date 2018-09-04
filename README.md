@@ -6,4 +6,5 @@
  4. Homework4 = OOPHomework
  5. Homework5 = JUnit Testing for Function Homework
  6. Homework6 = TicTacToe
+ 7. Homework7 = Exceptions
 
